@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard KPIs - Proyecto Kingdom</title>
+  <script src="https://jsdelivr.net"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #f1f5f9; color: #1e293b; margin: 0; padding: 20px; }
+    .container { max-width: 1000px; margin: auto; }
+    header { background: #1e3a8a; color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 20px; }
+    .card { background: white; padding: 18px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); border-top: 4px solid #3b82f6; }
+    .card.yellow { border-top-color: #eab308; }
+    .card.green { border-top-color: #16a34a; }
+    .badge { padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: bold; }
+    .bg-green { background: #dcfce7; color: #166534; }
+    .bg-yellow { background: #fef9c3; color: #854d0e; }
+    .metric { font-size: 28px; font-weight: bold; margin: 10px 0 4px; color: #0f172a; }
+    .progress { background: #e2e8f0; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 10px; }
+    .bar-green { background: #16a34a; height: 100%; width: 85%; }
+    .bar-yellow { background: #eab308; height: 100%; width: 72%; }
+    .bar-blue { background: #2563eb; height: 100%; width: 80%; }
+    .bar-purple { background: #7c3aed; height: 100%; width: 92%; }
+    .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .chart-box { background: white; padding: 18px; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+    @media (max-width: 700px) { .charts-row { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1 style="margin:0; font-size: 22px;">Dashboard de Seguimiento — Kingdom</h1>
+        <p style="margin:4px 0 0; font-size: 14px; color: #cbd5e1;">Gestión Económica del Hogar | 2 Desarrolladores Full Stack | Sprint 3</p>
+      </div>
+      <span class="badge bg-green">ESTADO GENERAL: ESTABLE</span>
+    </header>
+
+    <div class="grid">
+      <div class="card green">
+        <div style="display:flex; justify-content:space-between;"><strong>Cumplimiento Cronograma</strong><span class="badge bg-green">ÓPTIMO</span></div>
+        <div class="metric">85%</div>
+        <small>17 de 20 tareas completadas</small>
+        <div class="progress"><div class="bar-green"></div></div>
+      </div>
+      <div class="card yellow">
+        <div style="display:flex; justify-content:space-between;"><strong>Velocidad del Equipo</strong><span class="badge bg-yellow">ALERTA</span></div>
+        <div class="metric">18 / 25 pts</div>
+        <small>72% de story points cerrados</small>
+        <div class="progress"><div class="bar-yellow"></div></div>
+      </div>
+      <div class="card">
+        <div style="display:flex; justify-content:space-between;"><strong>Lead Time Promedio</strong><span class="badge bg-green">ÓPTIMO</span></div>
+        <div class="metric">2.8 días</div>
+        <small>Meta: &le; 3.5 días por feature</small>
+        <div class="progress"><div class="bar-blue"></div></div>
+      </div>
+      <div class="card green">
+        <div style="display:flex; justify-content:space-between;"><strong>Cobertura Tests / Bugs</strong><span class="badge bg-green">ÓPTIMO</span></div>
+        <div class="metric">92% / 0</div>
+        <small>0 errores críticos en balance</small>
+        <div class="progress"><div class="bar-purple"></div></div>
+      </div>
+    </div>
+
+    <div class="charts-row">
+      <div class="chart-box">
+        <h3 style="margin-top:0;">Velocidad por Sprint (Story Points)</h3>
+        <canvas id="velocityChart"></canvas>
+      </div>
+      <div class="chart-box">
+        <h3 style="margin-top:0;">Estado del Backlog — Kingdom (Sprint 3)</h3>
+        <canvas id="tasksChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    new Chart(document.getElementById('velocityChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Sprint 1', 'Sprint 2', 'Sprint 3 (Actual)'],
+        datasets: [
+          { label: 'Planificado', data:, backgroundColor: '#cbd5e1' },
+          { label: 'Completado', data:, backgroundColor: ['#16a34a', '#16a34a', '#eab308'] }
+        ]
+      }
+    });
+    new Chart(document.getElementById('tasksChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Completadas (17)', 'En Revisión QA (2)', 'Bloqueadas (1)'],
+        datasets: [{ data:, backgroundColor: ['#16a34a', '#3b82f6', '#ef4444'] }]
+      }
+    });
+  </script>
+</body>
+</html>
